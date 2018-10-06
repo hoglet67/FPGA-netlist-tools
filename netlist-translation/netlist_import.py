@@ -52,7 +52,7 @@ def read_transdefs(filename,remove_shorts=True):
   r = []
   f = open(filename,'r')
   for x in f.readlines():
-    m = re.match(r".*'(\w+)', (\d+), (\d+), (\d+).*",x)
+    m = re.match(r".*'(\w+)',\s*(\d+),\s*(\d+),\s*(\d+).*",x)
     if m:
       name = sanitize(m.group(1))
       gate = sanitize(m.group(2))

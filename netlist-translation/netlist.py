@@ -61,14 +61,19 @@ class netlist:
       if n.ntype()!=ntype:
         print 'type conflict when adding node',c,ntype,n.ntype()
       return n
+    print "Adding ",c
     n = node(c,ntype)
     self._nodes[c] = n
     return n
 
   def remove_node(self, c):
+    print "Removing ", c
     for n in c.neighbors():
       unlink(n,c)
-    del self._nodes[c.name()]
+    if self._nodes.has_key(c.name()):
+      del self._nodes[c.name()]
+    else:
+      print "Warning: failed to remove ", c
 
   def nodes(self):
     return self._nodes.values()
