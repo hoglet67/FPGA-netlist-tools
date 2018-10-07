@@ -1,4 +1,9 @@
-VSRC = ../../verilog/{test_6502.v,chip_6502.v,clocks_6502.v,ram_6502.v,models.v}
+VSRC = ../../verilog/test_6502.v\
+       ../../verilog/chip_6502.v\
+       ../../verilog/clocks_6502.v\
+       ../../verilog/ram_6502.v\
+       ../../verilog/models.v
+
 VFLAGS = -Wall
 
 test_allasm:
