@@ -129,15 +129,24 @@ def read_netlist_from_javascript(dir,remove_dups=True,remove_shorts=True):
     transdefs = remove_duplicates(transdefs)
 
   for (name,g,s,d) in transdefs:
-    ng = p.add_node(g,'node_analog')
-    ns = p.add_node(s,'node_analog')
-    nd = p.add_node(d,'node_analog')
-    nt = p.add_node(name,'t')
-    port = new_name('in')
-    link(nt,port,ng,None)
-    link(nt,'s',ns,None)
-    link(nt,'d',nd,None)
-    nt.data['function'] = port
+    if g=='vcc' and s=='vcc' and d=='vcc':
+      continue
+    if s=='vcc':
+      s,d = d,s
+    if g=='vcc' and d=='vcc':
+      pullup = p.add_node(s,'node_analog')
+      np = p.add_node(new_name('pullup'),'pullup')
+      link(np,'s',pullup,None)
+    else:
+      ng = p.add_node(g,'node_analog')
+      ns = p.add_node(s,'node_analog')
+      nd = p.add_node(d,'node_analog')
+      nt = p.add_node(name,'t')
+      port = new_name('in')
+      link(nt,port,ng,None)
+      link(nt,'s',ns,None)
+      link(nt,'d',nd,None)
+      nt.data['function'] = port
 
   for name in pullups:
     np = p.add_node(new_name('pullup'),'pullup')
