@@ -23,7 +23,7 @@ print_summary(p)
 
 detect_gates(p)
 print_summary(p)
-#print_gate_stats(p)
+print_gate_stats(p)
 
 detect_latches(p)
 print_summary(p)
@@ -37,8 +37,8 @@ print_summary(p)
 detect_inverters(p)
 print_summary(p)
 
-detect_muxes(p)
-print_summary(p)
+#detect_muxes(p)
+#print_summary(p)
 
-#print_netlist(p,'netlist.txt')
+print_netlist(p,'netlist_z80.txt')
 print_verilog_spice_netlist(p,'../verilog/chip_z80.v','chip_z80')
